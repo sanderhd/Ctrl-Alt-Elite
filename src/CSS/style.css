@@ -25,12 +25,12 @@ nav ul {
 }
 
 nav ul li {
-    margin-right: 10px; /* Reduced margin */
+    margin-right: 10px; 
 }
 
 nav ul li.right {
-    margin-left: auto; /* Align right items to the right */
-    margin-right: 0; /* Remove right margin */
+    margin-left: auto; 
+    margin-right: 0; 
     display: flex;
     align-items: center;
 }
