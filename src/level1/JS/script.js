@@ -4,61 +4,71 @@ const questions = [
         question: "De hoofdstad van Nederland is:",
         options: ["Amsterdam", "Rotterdam", "Haarlem", "Den Haag"],
         goodAnswer: "Amsterdam",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Amsterdam_%28NL%29%2C_Singel%2C_Bloemenmarkt_--_2017_--_1694.jpg/800px-Amsterdam_%28NL%29%2C_Singel%2C_Bloemenmarkt_--_2017_--_1694.jpg"
+        time: 10,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/KeizersgrachtReguliersgrachtAmsterdam.jpg/1024px-KeizersgrachtReguliersgrachtAmsterdam.jpg"
     },
     {
         question: "Wat is de grootste planeet in ons zonnestelsel?",
         options: ["Aarde", "Mars", "Jupiter", "Saturnus"],
         goodAnswer: "Jupiter",
+        time: 10,
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/800px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg"
     },
     {
         question: "Wat is de hoofdstad van Frankrijk?",
         options: ["Lyon", "Marseille", "Parijs", "Nice"],
         goodAnswer: "Parijs",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Paris_-_Eiffelturm_und_Marsfeld2.jpg/800px-Paris_-_Eiffelturm_und_Marsfeld2.jpg"
+        time: 10,
+        image: "https://www.zininfrankrijk.nl/wp-content/uploads/2019/03/Parijs-%C3%8Ele-de-France-shutterstock_710380270-660x330.jpg"
     },
     {
         question: "Wie schreef 'Romeo en Julia'?",
         options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
         goodAnswer: "William Shakespeare",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Shakespeare.jpg/800px-Shakespeare.jpg"
+        time: 10,
+        image: "https://hips.hearstapps.com/hmg-prod/images/william-shakespeare-194895-1-402.jpg?crop=1xw:1.0xh;center,top&resize=980:*"
     },
     {
         question: "Wat is de grootste oceaan ter wereld?",
         options: ["Atlantische Oceaan", "Indische Oceaan", "Stille Oceaan", "Arctische Oceaan"],
         goodAnswer: "Stille Oceaan",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Pacific_Ocean_-_en.png/800px-Pacific_Ocean_-_en.png"
+        time: 10,
+        image: "https://cdn.knmi.nl/system/data_center_article_blocks/image1s/000/000/441/large/transportband1.gif?1433258076"
     },
     {
         question: "Wat is de hoofdstad van Japan?",
         options: ["Osaka", "Kyoto", "Tokio", "Hiroshima"],
         goodAnswer: "Tokio",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Tokyo_Skyline.jpg/800px-Tokyo_Skyline.jpg"
+        time: 10,
+        image: "https://res.cloudinary.com/hello-tickets/image/upload/c_limit,f_auto,q_auto,w_1300/v1666062109/nfvpcqvorybqcin4j5en.jpg"
     },
     {
         question: "Wie ontdekte penicilline?",
         options: ["Marie Curie", "Alexander Fleming", "Louis Pasteur", "Isaac Newton"],
         goodAnswer: "Alexander Fleming",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Alexander_Fleming.jpg/800px-Alexander_Fleming.jpg"
+        time: 10,
+        image: "https://www.nobelprize.org/images/fleming-13037-content-portrait-mobile-tiny.jpg"
     },
     {
         question: "Wat is de langste rivier ter wereld?",
         options: ["Nijl", "Amazonerivier", "Yangtze", "Mississippi"],
         goodAnswer: "Nijl",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Nile_River.jpg/800px-Nile_River.jpg"
+        time: 10,
+        image: "https://www.natgeojunior.nl/wp-content/uploads/2017/07/Nijl4.jpg"
     },
     {
         question: "Wat is de hoofdstad van Italië?",
         options: ["Milaan", "Rome", "Venetië", "Napels"],
         goodAnswer: "Rome",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Rome_Pantheon_front_view.jpg/800px-Rome_Pantheon_front_view.jpg"
+        time: 10,
+        image: "https://worldstrides.com/wp-content/uploads/2015/07/api268.jpg"
     },
     {
         question: "Wie schilderde de Mona Lisa?",
         options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"],
         goodAnswer: "Leonardo da Vinci",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/800px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg"
+        time: 10,
+        image: "https://hips.hearstapps.com/hmg-prod/images/portrait-of-leonardo-da-vinci-1452-1519-getty.jpg?crop=1xw:1.0xh;center,top&resize=980:*"
     }
 ];
 
@@ -67,17 +77,29 @@ let goodAnswers = 0;
 let wrongAnswers = 0;
 
 const questionDisplay = document.getElementById("questionDisplay");
-const questionText = document.getElementById("questionText");
-const questionFeedback = document.getElementById("questionFeedback");
-const scoreDisplay = document.getElementById('scoreDisplay');
 const questionImage = document.getElementById('questionImage');
+const timeDisplay = document.getElementById('timeDisplay');
+
+function countdown() {
+    let time = questions[questionNumber].time;
+    let timer = setInterval(() => {
+        timeDisplay.innerHTML = time + ' sec';
+        time--;
+
+        if (time < 0) {
+            clearInterval(timer);
+            checkAnswer();
+        }
+    }, 1000);
+}
+
 
 // laad de vraag & de mogelijke antwoorden uit de array in de buttons en in h2
 function loadQuestion() {
     const question = questions[questionNumber];
-    questionDisplay.innerText = `Vraag: ${questionNumber + 1}`;
-    questionText.innerText = question.question;
+    questionDisplay.innerText = question.question;
     questionImage.src = question.image;
+    countdown();
 
     const optionButtons = document.querySelectorAll('.optionButton');
     optionButtons.forEach((button, index) => {
@@ -98,25 +120,29 @@ function selectAnswer(button) {
 // controleer of het gegeven antwoord goed is
 function checkAnswer(selectedAnswer) {
     const question = questions[questionNumber];
+    const isCorrect = selectedAnswer === question.goodAnswer;
 
-    if (selectedAnswer === question.goodAnswer) {
+    if (isCorrect) {
         goodAnswers++;
-        questionFeedback.innerHTML = "Goed!";
-        questionFeedback.style.color = "green";
     } else {
         wrongAnswers++;
-        questionFeedback.innerHTML = `Fout! Het goede antwoord was ${question.goodAnswer}`;
-        questionFeedback.style.color = "red";
     }
-
-    scoreDisplay.innerHTML = `Goed: ${goodAnswers} | Fout: ${wrongAnswers}`;
 
     questionNumber++;
     if (questionNumber < questions.length) {
         loadQuestion();
     } else {
-        scoreDisplay.innerHTML = `Quiz Afgelopen, je hebt ${goodAnswers} goede antwoorden en ${wrongAnswers} foute antwoorden gegeven.`;
+        // Redirect to result.php with the results
+        window.location.href = `result.php?goodAnswers=${goodAnswers}&wrongAnswers=${wrongAnswers}`;
     }
+}
+
+function showResult() {
+    let goodAnswerDisplay = document.getElementById('goodAnswersDisplay');
+    let wrongAnswerDisplay = document.getElementById('wrongAnswersDisplay');
+
+    goodAnswerDisplay.innerHTML = goodAnswers;
+    wrongAnswerDisplay.innerHTML = wrongAnswers;
 }
 
 // laad de eerste vraag bij het openen van de pagina, en de volgende vraag na het beantwoorden van een vraag
