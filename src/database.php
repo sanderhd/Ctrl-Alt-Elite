@@ -5,8 +5,7 @@ $password = "";
 $dbname = "ctrl_alt_elite";
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password); // Corrected database name
-  // set the PDO error mode to exception
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   echo "<script>console.log('Connected successfully');</script>";
 } catch(PDOException $e) {
