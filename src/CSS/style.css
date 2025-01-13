@@ -34,3 +34,22 @@ nav ul li.right {
     display: flex;
     align-items: center;
 }
+
+/* LOGIN */
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login h1 {
+    color: var(--primary);
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: white;
+}
