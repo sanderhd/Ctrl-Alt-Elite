@@ -37,8 +37,8 @@ const questions = [
     },
     {
         question: "Wat is de hoofdstad van Japan?",
-        options: ["Osaka", "Kyoto", "Tokio", "Hiroshima"],
-        goodAnswer: "Tokio",
+        options: ["Osaka", "Kyoto", "Tokyo", "Hiroshima"],
+        goodAnswer: "Tokyo",
         time: 10,
         image: "https://res.cloudinary.com/hello-tickets/image/upload/c_limit,f_auto,q_auto,w_1300/v1666062109/nfvpcqvorybqcin4j5en.jpg"
     },
@@ -80,13 +80,23 @@ const questionDisplay = document.getElementById("questionDisplay");
 const questionImage = document.getElementById('questionImage');
 const timeDisplay = document.getElementById('timeDisplay');
 
+let timer; // Declareer de timer variabele buiten de functie
+
 function countdown() {
     let time = questions[questionNumber].time;
-    let timer = setInterval(() => {
+
+    // Stop de vorige timer als die bestaat
+    if (timer) {
+        clearInterval(timer);
+    }
+
+    // Stel een interval timer in die elke 1000 milliseconden wordt uitgevoerd
+    timer = setInterval(() => {
         timeDisplay.innerHTML = time + ' sec';
         time--;
 
-        if (time < 0) {
+        // Stop de timer als de tijd op is
+        if (time <= 0) {
             clearInterval(timer);
             checkAnswer();
         }
@@ -94,12 +104,11 @@ function countdown() {
 }
 
 
-// laad de vraag & de mogelijke antwoorden uit de array in de buttons en in h2
 function loadQuestion() {
     const question = questions[questionNumber];
     questionDisplay.innerText = question.question;
     questionImage.src = question.image;
-    countdown();
+    countdown(); // Start de countdown voor de nieuwe vraag
 
     const optionButtons = document.querySelectorAll('.optionButton');
     optionButtons.forEach((button, index) => {
