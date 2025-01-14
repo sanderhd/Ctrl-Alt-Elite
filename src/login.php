@@ -1,9 +1,34 @@
 <?php
-// database verbinden
-// pak de username en password uit het formulier van HTML
-// controleer of de gebruikersnaam bestaat
-// controleer of het wachtwoord erbij hoort
-// als het klopt login en stuur door naar het dashboard
+require 'database.php';
+
+$showError = false;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    // controleer of de username bestaat
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        // controleer of ht wachtwoord klopt
+        if (password_verify($password, $user['password'])) {
+            // inloggen en naar dashboard sturen
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $user['role'];
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            $showError = "Wachtwoord klopt niet!";
+        }
+    } else {
+        $showError = "Deze gebruiker bestaaat niet!";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,13 +40,19 @@
     <title>Login</title>
 </head>
 <body>
+    <?php
+    if ($showError) {
+        echo '<div class="alert alert-danger">
+                <strong>Error!</strong> ' . $showError . '
+              </div>';
+    }
+    ?>
     <div class="loginContainer">
         <div class="loginBox">
             <h1>Login</h1><br>
-            <form action="login.php">
-                <input type="text" name="username" placeholder="email address"><br>
-                <input type="password" name="password" placeholder="password"><br>
-                <!-- <button><img src="assets/google_icon_orange.png" alt="googleLogo">Login with Google</button> -->
+            <form action="login.php" method="post">
+                <input type="text" name="username" placeholder="email address" required><br>
+                <input type="password" name="password" placeholder="password" required><br>
                 <button type="submit">Login</button>
                 <a href="signup.php">Sign Up</a>
             </form>
