@@ -14,19 +14,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        // controleer of ht wachtwoord klopt
+        // controleer of het wachtwoord klopt
         if (password_verify($password, $user['password'])) {
             // inloggen en naar dashboard sturen
             session_start();
             $_SESSION['username'] = $username;
-            $_SESSION['role'] = $user['role'];
             header("Location: dashboard.php");
             exit();
         } else {
             $showError = "Wachtwoord klopt niet!";
         }
     } else {
-        $showError = "Deze gebruiker bestaaat niet!";
+        $showError = "Deze gebruiker bestaat niet!";
     }
 }
 ?>
