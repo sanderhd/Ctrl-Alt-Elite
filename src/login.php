@@ -1,7 +1,9 @@
 <?php
-require_once "database.php";
-
-// Hier komt de login code, die controlleert of de gebruiker in de database staat en of het wachtwoord bij de naam klopt.
+// database verbinden
+// pak de username en password uit het formulier van HTML
+// controleer of de gebruikersnaam bestaat
+// controleer of het wachtwoord erbij hoort
+// als het klopt login en stuur door naar het dashboard
 ?>
 
 <!DOCTYPE html>
