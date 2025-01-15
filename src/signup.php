@@ -18,11 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //controleert of er geen bestaande gebruikers zijn met dezelfde username
     if ($num == 0) {
+        //2x wachtwoord invoeren en controleren of ze overeenkomen en als dat zo is hashen
         if ($password == $cpassword) {
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
             // in de database zetten als user
-            $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, 'user')");
+            $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $hash);
 
