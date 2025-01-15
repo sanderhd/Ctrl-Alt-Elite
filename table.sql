@@ -2,24 +2,29 @@
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    role ENUM('user', 'teacher', 'admin') NOT NULL DEFAULT 'user'
+);
+
+-- Volgorde goed zetten
+CREATE TABLE Quiz (
+    quiz_id INT AUTO_INCREMENT PRIMARY KEY,
+    quiz_name VARCHAR(255),
+    created_by INT NOT NULL
 );
 
 CREATE TABLE Questions (
     question_id INT AUTO_INCREMENT PRIMARY KEY,
     quiz_id INT NOT NULL,
-    question_text VARCHAR(255)
+    question_text VARCHAR(255),
+    time_limit INT,
+    FOREIGN KEY (quiz_id) REFERENCES Quiz(quiz_id)
 );
 
 CREATE TABLE Options (
     option_id INT AUTO_INCREMENT PRIMARY KEY,
     question_id INT NOT NULL,
     option_text VARCHAR(255),
-    is_correct BOOLEAN NOT NULL
-);
-
-CREATE TABLE Quiz (
-    quiz_id INT AUTO_INCREMENT PRIMARY KEY,
-    quiz_name VARCHAR(255),
-    created_by INT NOT NULL
+    is_correct BOOLEAN NOT NULL,
+    FOREIGN KEY (question_id) REFERENCES Questions(question_id)
 );

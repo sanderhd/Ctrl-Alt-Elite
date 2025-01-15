@@ -3,12 +3,13 @@ $showAlert = false;
 $showError = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'database.php';
+    include './database.php';
 
     // uit het formulier halen en in var zetten
     $username = $_POST["username"];
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];
+    $role = 'user'; // set default role to 'user'
 
     // controleer of de naam bestaat
     $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
@@ -23,9 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
             // in de database zetten als user
-            $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+            $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $hash);
+            $stmt->bindParam(':role', $role);
 
             if ($stmt->execute()) {
                 $showAlert = true;
@@ -71,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" name="password" placeholder="password" required><br>
                 <input type="password" name="cpassword" placeholder="confirm password" required><br>
                 <button type="submit">Sign Up</button><br>
-                <a href="login.php">Login</a>
+                <a href="login.php">Already a user? Login</a>
             </form>
         </div>
     </div>

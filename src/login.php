@@ -1,5 +1,5 @@
 <?php
-require 'database.php';
+require './database.php';
 
 $showError = false;
 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $user['id']; // Store user ID in session
-            header("Location: maakquiz.php");
+            header("Location: dashboard/dashboard.php");
             exit();
         } else {
             $showError = "Wachtwoord klopt niet!";

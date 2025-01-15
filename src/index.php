@@ -1,6 +1,3 @@
-<?php
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,20 +12,20 @@
 <body>
     <nav>
         <ul class="left-nav">
-            <li><img src="assets/ctrlaltelite.png"></li> <!-- <span>Ctrl Alt Elite</span> -->
+            <li><img src="assets/ctrlaltelite.png"></li>
             <li><a href="index.php">Home</a></li>
             <li><a href="discover.php">Discover</a></li>
-            <li><a href="dashboard.php">Dashboard</a></li>
+            <li><a href="dashboard/dashboard.php">Dashboard</a></li>
         </ul>
         <ul class="right-nav">
             <li><a href="login.php">Login</a></li>
-            <li><a href="signup.php">Signup</a></li>
-            <li><i class="fa-solid fa-globe"></i>
+            <li><a href="signup.php">Sign up</a></li>
+            <!-- <li><i class="fa-solid fa-globe"></i>
                 <select name="language" id="language">
                     <option value="english">EN</option>
                     <option value="dutch">NL</option>
                 </select>
-            </li>
+            </li> -->
         </ul>
     </nav>
     <div class="main">
@@ -59,7 +56,7 @@
     
     <script>
         function sendToDashboard() {
-            window.location.href = "dashboard.php";
+            window.location.href = "dashboard/dashboard.php";
         }
     </script>
 </body>
