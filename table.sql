@@ -8,11 +8,11 @@ CREATE TABLE users (
 CREATE TABLE Questions (
     question_id INT AUTO_INCREMENT PRIMARY KEY,
     quiz_id INT NOT NULL,
-    question_text VARCHAR(255) 
+    question_text VARCHAR(255)
 );
 
 CREATE TABLE Options (
-    option_id INT PRIMARY KEY,
+    option_id INT AUTO_INCREMENT PRIMARY KEY,
     question_id INT NOT NULL,
     option_text VARCHAR(255),
     is_correct BOOLEAN NOT NULL
