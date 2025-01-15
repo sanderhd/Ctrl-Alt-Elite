@@ -19,7 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // inloggen en naar dashboard sturen
             session_start();
             $_SESSION['username'] = $username;
-            header("Location: dashboard.php");
+            $_SESSION['user_id'] = $user['id']; // Store user ID in session
+            header("Location: maakquiz.php");
             exit();
         } else {
             $showError = "Wachtwoord klopt niet!";

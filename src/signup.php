@@ -67,10 +67,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="loginBox">
             <h1>Sign Up</h1>
             <form action="signup.php" method="post">
-                <input type="text" name="username" placeholder="username" required>
-                <input type="password" name="password" placeholder="password" required>
-                <input type="password" name="cpassword" placeholder="confirm password" required>
-                <button type="submit">Sign Up</button>
+                <input type="text" name="username" placeholder="username" required><br>
+                <input type="password" name="password" placeholder="password" required><br>
+                <input type="password" name="cpassword" placeholder="confirm password" required><br>
+                <button type="submit">Sign Up</button><br>
                 <a href="login.php">Login</a>
             </form>
         </div>
