@@ -48,12 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ?>
     <div class="loginContainer">
         <div class="loginBox">
-            <h1>Login</h1><br>
+            <h1>Login</h1>
             <form action="login.php" method="post">
-                <input type="text" name="username" placeholder="email address" required><br>
-                <input type="password" name="password" placeholder="password" required><br>
+                <input type="text" name="username" placeholder="Username" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
                 <button type="submit">Login</button>
-                <a href="signup.php">Sign Up</a>
+                <a href="signup.php">Don't have an account? Sign Up</a>
             </form>
         </div>
     </div>

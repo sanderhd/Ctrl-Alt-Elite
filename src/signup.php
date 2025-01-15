@@ -16,9 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $num = $stmt->rowCount();
 
-    //controleert of er geen bestaande gebruikers zijn met dezelfde username
+    // controleert of er geen bestaande gebruikers zijn met dezelfde username
     if ($num == 0) {
-        //2x wachtwoord invoeren en controleren of ze overeenkomen en als dat zo is hashen
+        // 2x wachtwoord invoeren en controleren of ze overeenkomen en als dat zo is hashen
         if ($password == $cpassword) {
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -65,11 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ?>
     <div class="loginContainer">
         <div class="loginBox">
-            <h1>Sign Up</h1><br>
+            <h1>Sign Up</h1>
             <form action="signup.php" method="post">
-                <input type="text" name="username" placeholder="username" required><br>
-                <input type="password" name="password" placeholder="password" required><br>
-                <input type="password" name="cpassword" placeholder="confirm password" required><br>
+                <input type="text" name="username" placeholder="username" required>
+                <input type="password" name="password" placeholder="password" required>
+                <input type="password" name="cpassword" placeholder="confirm password" required>
                 <button type="submit">Sign Up</button>
                 <a href="login.php">Login</a>
             </form>
