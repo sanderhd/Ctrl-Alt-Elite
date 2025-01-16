@@ -4,6 +4,7 @@ require_once "../classes/quiz.php";
 
 session_start(); // sessie starten voor de zekerheid
 $user_id = $_SESSION['user_id'] ?? null; // userid ophalen uit de sessie
+$username = $_SESSION['username'] ?? null; // username ophalen uit de sessie
 
 // Als er een POST request komt de quiz opslaan
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -26,12 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Controleren of je ingelogt bent, anders zeggen dat je moet inloggen.
-    if ($user_id === null) {
-        die("Er is geen User ID gevonden. Log in om een quiz te maken. <script ");
+    if ($user_id === null || $username === null) {
+        die("Er is geen User ID of username gevonden. Log in om een quiz te maken. <script ");
     }
 
     // nieuwe quiz maken van de class uit classes/quiz.php 
-    $quiz = new Quiz($quiz_name, $user_id, $questions);
+    $quiz = new Quiz($quiz_name, $username, $questions);
 
     // quiz in de database zetten
     $quizName = $quiz->getName();
@@ -95,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="createContainer">
         <div class="createBox">
             <form action="createquiz.php" method="post">
-                <h1>Maak een nieuwe quiz</h1>
+                <h1>Maak een nieuwe quiz.</h1>
                 <h2>Quiz Naam:</h2>
                 <input type="text" name="name" placeholder="Bijv. Ctrl Alt Quiz!" required><br><br>
 

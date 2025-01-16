@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];
-    $role = 'user'; // set default role to 'user'
+    $role = 'Student'; // set default role to 'user'
 
     // controleer of de naam bestaat
     $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");

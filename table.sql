@@ -3,14 +3,14 @@ CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('user', 'teacher', 'admin') NOT NULL DEFAULT 'user'
+    role ENUM('Student', 'Docent', 'Administrator') NOT NULL DEFAULT 'Student'
 );
 
 -- Volgorde goed zetten
 CREATE TABLE Quiz (
     quiz_id INT AUTO_INCREMENT PRIMARY KEY,
     quiz_name VARCHAR(255),
-    created_by INT NOT NULL
+    created_by VARCHAR(255) NOT NULL -- Store username instead of user ID
 );
 
 CREATE TABLE Questions (

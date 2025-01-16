@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
     <title>Ctrl Alt Elite</title>
-    <script src="https://kit.fontawesome.com/24be3f9595.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -20,12 +20,12 @@
         <ul class="right-nav">
             <li><a href="login.php">Login</a></li>
             <li><a href="signup.php">Sign up</a></li>
-            <!-- <li><i class="fa-solid fa-globe"></i>
+            <li><i class="fa-solid fa-globe"></i>
                 <select name="language" id="language">
                     <option value="english">EN</option>
                     <option value="dutch">NL</option>
                 </select>
-            </li> -->
+            </li>
         </ul>
     </nav>
     <div class="main">
@@ -38,8 +38,8 @@
             <img src="assets/opa.png" alt="opa">
         </div>
 
-        <button type="submit" class="hostnow" onclick="sendToDashboard()">Host Now!</button> <a class="underline"
-            href="discover.php">Create Your Quiz</a>
+        <button type="submit" class="hostnow" onclick="sendToDashboard()">Host Now!</button> 
+        <a class="underline" style="text-align: left;" href="discover.php">Create Your Quiz</a>
             
         <h4>Get our app now on:</h4>
         <div class="appStore">
