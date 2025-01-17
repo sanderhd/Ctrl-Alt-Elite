@@ -80,7 +80,15 @@ const questionDisplay = document.getElementById("questionDisplay");
 const questionImage = document.getElementById('questionImage');
 const timeDisplay = document.getElementById('timeDisplay');
 
+if (!questionDisplay || !questionImage || !timeDisplay) {
+    console.error("One or more required elements are missing from the DOM.");
+}
+
 let timer;
+
+function nextQuestion() {
+    loadQuestion(); // Load the next question
+}
 
 function countdown() {
     let time = questions[questionNumber].time;
@@ -104,10 +112,11 @@ function countdown() {
 }
 
 function loadQuestion() {
+    if (!questionDisplay || !questionImage || !timeDisplay) return;
+
     const question = questions[questionNumber];
     questionDisplay.innerText = question.question;
     questionImage.src = question.image;
-    countdown(); // start het aftellen bij het laden van een nieuwe vraag.
 
     const optionButtons = document.querySelectorAll('.optionButton');
     optionButtons.forEach((button, index) => {
@@ -115,6 +124,13 @@ function loadQuestion() {
         button.value = question.options[index];
         button.classList.remove('selected');
     });
+
+    countdown(); // Start the timer for each question
+}
+
+// Ensure the quiz starts immediately when the page loads
+window.onload = function() {
+    loadQuestion(); // Start the quiz immediately
 }
 
 // selecteer een antwoord en controleer het direct
@@ -144,14 +160,6 @@ function checkAnswer(selectedAnswer = null) {
         // sturen naar result.php met het goede en foute antwoorden
         window.location.href = `result.php?goodAnswers=${goodAnswers}&wrongAnswers=${wrongAnswers}`;
     }
-}
-
-function showResult() {
-    let goodAnswerDisplay = document.getElementById('goodAnswersDisplay');
-    let wrongAnswerDisplay = document.getElementById('wrongAnswersDisplay');
-
-    goodAnswerDisplay.innerHTML = goodAnswers;
-    wrongAnswerDisplay.innerHTML = wrongAnswers;
 }
 
 // laad de eerste vraag bij het openen van de pagina, en de volgende vraag na het beantwoorden van een vraag
