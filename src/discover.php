@@ -55,9 +55,9 @@ try {
                 <h3><?php echo htmlspecialchars($quiz['quiz_name']); ?></h3>  <!--  quiz naam pakken uit de array en neerzetten in h3 -->
                 <h4>Created by: <?php echo htmlspecialchars($quiz['created_by']); ?></h4> <!-- quiz maker pakken uit de array en neerzetten in h4 -->
                 <h4>Quiz ID: <?php echo htmlspecialchars($quiz['quiz_id']); ?></h4> <!-- quiz id pakken uit de array en neerzetten in h4 -->
-                <button>Play Quiz</button>
+                <button onclick="playQuiz(<?php echo htmlspecialchars($quiz['quiz_id']); ?>)">Play Quiz</button>
             </div>
-        <?php endforeach; ?> // einde van de loop
+        <?php endforeach; ?> <!-- einde van de loop -->
     </div>
 
     <script>
@@ -78,6 +78,10 @@ try {
                     boxes[i].style.display = 'none'; // niks laten zien
                 }
             }
+        }
+
+        function playQuiz(quizId) {
+            window.location.href = 'quiz/quizPlay.php?quizId=' + quizId; 
         }
     </script>
 </body>
