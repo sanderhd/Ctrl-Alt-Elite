@@ -39,22 +39,23 @@ try {
 </head>
 <body>
     <nav>
-        <ul class="left-nav">
+        <ul class="left-nav"></ul>
             <li><img src="../assets/ctrlaltelite.png"></li>
             <li><a href="../index.php">Home</a></li>
             <li><a href="../discover.php">Discover</a></li>
         </ul>
-        <ul class="right-nav">
+        <ul class="right-nav"></ul>
             <li><a href="settings.php">Settings</a></li>
             <li><a href="../signout.php">Sign Out</a></li>
         </ul>
     </nav>
     <div class="dashboardContainer">
-        <h2>Mijn Quizzes:</h2>
-        <div class="quizContainer">
+        <h1>Mijn Quizzes</h1>
+        <a href="createquiz.php">Maak een quiz</a>
+        <div class="quizContainer"></div>
             <?php if (!empty($quizzes)): ?> <!-- als er quizen zijn -->
                 <?php foreach ($quizzes as $quiz): ?> <!-- loop door alle quizen en in een div neerzetten -->
-                    <div class="quizBox">
+                    <div class="quizBox"></div>
                         <h3><?php echo htmlspecialchars($quiz['quiz_name']); ?></h3>
                     </div>
                 <?php endforeach; ?>

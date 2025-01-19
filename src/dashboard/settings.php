@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="settingsContainer">
         <div class="settingsBox">
-            <h1>Settings</h1>
+            <h1 style="text-align: center;">Settings</h1>
             <?php
             if ($showAlert) {
                 echo '<div class="alert alert-success">

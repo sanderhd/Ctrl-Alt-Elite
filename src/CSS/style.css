@@ -32,7 +32,7 @@ nav {
 }
 
 nav ul {
-    list-style-type: none;
+    list-style-type: none; /* Remove bullet points */
     margin: 0;
     padding: 0;
     display: flex;
@@ -185,6 +185,7 @@ h1 {
     text-align: center;
     color: #333;
     margin-bottom: 1.5em;
+    text-align: center;
 }
 
 form {

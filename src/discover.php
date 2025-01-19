@@ -81,7 +81,7 @@ try {
         }
 
         function playQuiz(quizId) {
-            window.location.href = 'quiz/quizPlay.php?quizId=' + quizId; 
+            window.location.href = 'quiz/playQuiz.php?quizId=' + quizId; 
         }
     </script>
 </body>

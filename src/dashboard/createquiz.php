@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <h3>Vraag 1:</h3>
                         <input type="text" name="question1" placeholder="Bijv. Wat is de hoofdstad van Nederland?" required><br>
                         <span>Antwoorden | Zet een komma tussen de antwoorden als je meer antwoorden wilt dan 1.</span><br>
-                        <input type="text" name="antwoorden1" placeholder="Bijv. Amsterdam, Rotterdam, Groningen, Utrecht" required><br>
+                        <input type="text" name="antwoorden1" placeholder="Bijv. Amsterdam, Rotterdam, Groningen, Utrecht" max="4" required><br>
                         <span>Goede Antwoord | Typ het 1:1 over van de mogelijke antwoorden.</span><br>
                         <input type="text" name="correctanswer1" placeholder="Bijv. Amsterdam" required><br><br>
                         <span>Tijdslimiet (seconden):</span><br>
@@ -119,7 +119,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-
     <script>
         let questionCount = 1;
 
@@ -130,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             questionDiv.classList.add('question');
             questionDiv.innerHTML = `
                 <h3>Vraag ${questionCount}:</h3>
-                <input type="text" name="question${questionCount}" placeholder="Bijv. Wat is de hoofdstad van Nederland?" required><br>
+                <input type="text" name="question${questionCount}" placeholder="Bijv. Wat is de hoofdstad van Nederland?" max="4" required><br>
                 <span>Antwoorden | Zet een komma tussen de antwoorden als je meer antwoorden wilt dan 1.</span><br>
                 <input type="text" name="antwoorden${questionCount}" placeholder="Zet een comma tussen de antwoorden." required><br>
                 <span>Goede Antwoord | Typ het 1:1 over van de mogelijke antwoorden.</span><br>
@@ -142,5 +141,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </script>
 </body>
-
 </html>
