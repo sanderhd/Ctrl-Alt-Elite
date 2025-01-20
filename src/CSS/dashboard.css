@@ -6,6 +6,61 @@
     --secondary: #FF833D;
 }
 
+.quizContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    padding: 20px; 
+}
+/* Additional styles for quiz boxes */
+
+
+/* Additional styles for the dashboard page */
+.dashboardContainer {
+    margin-top: 70px; /* Adjust for fixed nav */
+    padding: 20px;
+    text-align: center;
+}
+
+.dashboardContainer h1 {
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.dashboardContainer a {
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: var(--secondary);
+    color: var(--background);
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+
+
+.quizBox {
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: calc(33.333% - 40px); /* 3 columns layout */
+    box-sizing: border-box;
+    transition: transform 0.3s;
+}
+
+.quizBox:hover {
+    transform: translateY(-5px);
+}
+
+
+
+
+
 html, body {
     height: 100%;
     margin: 0;
@@ -32,7 +87,7 @@ nav {
 }
 
 nav ul {
-    list-style-type: none; /* Remove bullet points */
+    list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
@@ -170,14 +225,7 @@ button:hover {
 }
 
 
-/* DASHBOARD PAGE */
-.quizContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; 
-    align-items: flex-start; 
-    padding: 20px; 
-}
+
 
 
 a {

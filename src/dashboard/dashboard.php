@@ -55,7 +55,7 @@ try {
         <div class="quizContainer"></div>
             <?php if (!empty($quizzes)): ?> <!-- als er quizen zijn -->
                 <?php foreach ($quizzes as $quiz): ?> <!-- loop door alle quizen en in een div neerzetten -->
-                    <div class="quizBox"></div>
+                    <div class="quizBox">
                         <h3><?php echo htmlspecialchars($quiz['quiz_name']); ?></h3>
                     </div>
                 <?php endforeach; ?>
