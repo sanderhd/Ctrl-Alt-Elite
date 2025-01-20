@@ -9,6 +9,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    background: url('path/to/your/background-image.jpg') no-repeat center center fixed;
 }
 
 body {
@@ -29,9 +30,7 @@ nav {
     top: 0;
     left: 0;
     z-index: 100;
-    background: linear-gradient(90deg, #ff7f50, #ff4500); /* Kleurverloop toegevoegd */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Schaduw toegevoegd */
-    color: white; /* Zorgt ervoor dat tekst leesbaar blijft */
+
 }
 
 nav ul {
