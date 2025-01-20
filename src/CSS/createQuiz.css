@@ -16,6 +16,9 @@ body {
     background-color: var(--background);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 nav {
@@ -77,11 +80,8 @@ nav ul li img {
     width: 175px;
 }
 
-/*  */
-/*  */
-/*  */
-/*  */
-
+.createContainer {
+    display: flex;
 .createContainer {
     display: flex;
     justify-content: center;

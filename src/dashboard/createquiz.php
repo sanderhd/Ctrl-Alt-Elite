@@ -6,66 +6,78 @@ session_start(); // sessie starten voor de zekerheid
 $user_id = $_SESSION['user_id'] ?? null; // userid ophalen uit de sessie
 $username = $_SESSION['username'] ?? null; // username ophalen uit de sessie
 
-// Als er een POST request komt de quiz opslaan
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $quiz_name = $_POST['name']; // quiz naam ophalen
-    $questions = []; // array voor de vragen
+$showAlert = false;
+$showError = false;
 
-    error_log("Received POST request with quiz name: $quiz_name"); // debug
+// Check if the user has already created a quiz in the last 5 minutes
+if (isset($_COOKIE['quiz_created'])) {
+    $showError = "You can only create one quiz every 5 minutes.";
+} else {
+    // Als er een POST request komt de quiz opslaan
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $quiz_name = $_POST['name']; // quiz naam ophalen
+        $questions = []; // array voor de vragen
 
-    for ($i = 1; isset($_POST["question$i"]); $i++) {
-        $question_text = $_POST["question$i"]; // vraag ophalen
-        $answers = explode(',', $_POST["antwoorden$i"]); // antwoorden splitten op komma
-        $correct_answer = $_POST["correctanswer$i"];
-        $time_limit = $_POST["timelimit$i"]; // get the time limit for the question
-        $questions[] = [
-            'question_text' => $question_text,
-            'answers' => $answers,
-            'correct_answer' => $correct_answer,
-            'time_limit' => $time_limit // add time limit to the question array
-        ]; // vragen in de array zetten
-    }
+        error_log("Received POST request with quiz name: $quiz_name"); // debug
 
-    // Controleren of je ingelogt bent, anders zeggen dat je moet inloggen.
-    if ($user_id === null || $username === null) {
-        die("Er is geen User ID of username gevonden. Log in om een quiz te maken. <script ");
-    }
-
-    // nieuwe quiz maken van de class uit classes/quiz.php 
-    $quiz = new Quiz($quiz_name, $username, $questions);
-
-    // quiz in de database zetten
-    $quizName = $quiz->getName();
-    $quizCreator = $quiz->getCreator();
-    $stmt = $conn->prepare("INSERT INTO Quiz (quiz_name, created_by) VALUES (:quiz_name, :created_by)"); // querry voorbereiden
-    $stmt->bindParam(':quiz_name', $quizName);//binden van de parameters
-    $stmt->bindParam(':created_by', $quizCreator);
-    $stmt->execute();//query uitvoeren
-    $quiz_id = $conn->lastInsertId();//laatste id ophalen
-
-    // vragen en antwoorden in de database zetten
-    foreach ($quiz->getQuestions() as $question) {
-        $questionText = $question['question_text'];
-        $timeLimit = $question['time_limit']; // get the time limit from the question array
-        error_log("Inserting question: $questionText with time limit: $timeLimit");
-        $stmt = $conn->prepare("INSERT INTO Questions (quiz_id, question_text, time_limit) VALUES (:quiz_id, :question_text, :time_limit)");
-        $stmt->bindParam(':quiz_id', $quiz_id);
-        $stmt->bindParam(':question_text', $questionText);
-        $stmt->bindParam(':time_limit', $timeLimit); // bind the time limit parameter
-        $stmt->execute();
-        $question_id = $conn->lastInsertId();
-
-        foreach ($question['answers'] as $answer) {
-            $optionText = trim($answer); // spaties deleten
-            $is_correct = (strcasecmp($optionText, $question['correct_answer']) === 0) ? 1 : 0; // hoofdlettergevoeligheid negeren
-            error_log("Inserting answer: $optionText with is_correct: $is_correct"); //debug omdat ja HET WERKT NIETTT
-
-            $stmt = $conn->prepare("INSERT INTO Options (question_id, option_text, is_correct) VALUES (:question_id, :option_text, :is_correct)");
-            $stmt->bindParam(':question_id', $question_id);
-            $stmt->bindParam(':option_text', $optionText);
-            $stmt->bindParam(':is_correct', $is_correct);
-            $stmt->execute();
+        for ($i = 1; isset($_POST["question$i"]); $i++) {
+            $question_text = $_POST["question$i"]; // vraag ophalen
+            $answers = explode(',', $_POST["antwoorden$i"]); // antwoorden splitten op komma
+            $correct_answer = $_POST["correctanswer$i"];
+            $time_limit = $_POST["timelimit$i"]; // get the time limit for the question
+            $questions[] = [
+                'question_text' => $question_text,
+                'answers' => $answers,
+                'correct_answer' => $correct_answer,
+                'time_limit' => $time_limit // add time limit to the question array
+            ]; // vragen in de array zetten
         }
+
+        // Controleren of je ingelogt bent, anders zeggen dat je moet inloggen.
+        if ($user_id === null || $username === null) {
+            die("Er is geen User ID of username gevonden. Log in om een quiz te maken. <script ");
+        }
+
+        // nieuwe quiz maken van de class uit classes/quiz.php 
+        $quiz = new Quiz($quiz_name, $username, $questions);
+
+        // quiz in de database zetten
+        $quizName = $quiz->getName();
+        $quizCreator = $quiz->getCreator();
+        $stmt = $conn->prepare("INSERT INTO Quiz (quiz_name, created_by) VALUES (:quiz_name, :created_by)"); // querry voorbereiden
+        $stmt->bindParam(':quiz_name', $quizName);//binden van de parameters
+        $stmt->bindParam(':created_by', $quizCreator);
+        $stmt->execute();//query uitvoeren
+        $quiz_id = $conn->lastInsertId();//laatste id ophalen
+
+        // vragen en antwoorden in de database zetten
+        foreach ($quiz->getQuestions() as $question) {
+            $questionText = $question['question_text'];
+            $timeLimit = $question['time_limit']; // get the time limit from the question array
+            error_log("Inserting question: $questionText with time limit: $timeLimit");
+            $stmt = $conn->prepare("INSERT INTO Questions (quiz_id, question_text, time_limit) VALUES (:quiz_id, :question_text, :time_limit)");
+            $stmt->bindParam(':quiz_id', $quiz_id);
+            $stmt->bindParam(':question_text', $questionText);
+            $stmt->bindParam(':time_limit', $timeLimit); // bind the time limit parameter
+            $stmt->execute();
+            $question_id = $conn->lastInsertId();
+
+            foreach ($question['answers'] as $answer) {
+                $optionText = trim($answer); // spaties deleten
+                $is_correct = (strcasecmp($optionText, $question['correct_answer']) === 0) ? 1 : 0; // hoofdlettergevoeligheid negeren
+                error_log("Inserting answer: $optionText with is_correct: $is_correct"); //debug omdat ja HET WERKT NIETTT
+
+                $stmt = $conn->prepare("INSERT INTO Options (question_id, option_text, is_correct) VALUES (:question_id, :option_text, :is_correct)");
+                $stmt->bindParam(':question_id', $question_id);
+                $stmt->bindParam(':option_text', $optionText);
+                $stmt->bindParam(':is_correct', $is_correct);
+                $stmt->execute();
+            }
+        }
+
+        $showAlert = true;
+        // Set a cookie to rate limit quiz creation
+        setcookie('quiz_created', 'true', time() + 600); // 300 seconds = 5 minutes
     }
 }
 ?>
@@ -93,6 +105,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <li><a href="../signout.php">Sign Out</a></li>
         </ul>
     </nav>
+    <?php
+    if ($showAlert) {
+        echo '<div class="alert alert-success">
+                <strong>Success!</strong> Your quiz has been created.
+              </div>';
+    }
+    if ($showError) {
+        echo '<div class="alert alert-danger">
+                <strong>Error!</strong> ' . $showError . '
+              </div>';
+    }
+    ?>
     <div class="createContainer">
         <div class="createBox">
             <form action="createquiz.php" method="post">

@@ -2,43 +2,50 @@
 $showAlert = false;
 $showError = false;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include './database.php';
+// Check if the user has already created an account in the last 5 minutes
+if (isset($_COOKIE['account_created'])) {
+    $showError = "You can only create one account every 5 minutes.";
+} else {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        include './database.php';
 
-    // uit het formulier halen en in var zetten
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    $cpassword = $_POST["cpassword"];
-    $role = 'Student'; // set default role to 'user'
+        // uit het formulier halen en in var zetten
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        $cpassword = $_POST["cpassword"];
+        $role = 'Student'; // set default role to 'user'
 
-    // controleer of de naam bestaat
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt->bindParam(':username', $username);
-    $stmt->execute();
-    $num = $stmt->rowCount();
+        // controleer of de naam bestaat
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $num = $stmt->rowCount();
 
-    // controleert of er geen bestaande gebruikers zijn met dezelfde username
-    if ($num == 0) {
-        // 2x wachtwoord invoeren en controleren of ze overeenkomen en als dat zo is hashen
-        if ($password == $cpassword) {
-            $hash = password_hash($password, PASSWORD_DEFAULT);
+        // controleert of er geen bestaande gebruikers zijn met dezelfde username
+        if ($num == 0) {
+            // 2x wachtwoord invoeren en controleren of ze overeenkomen en als dat zo is hashen
+            if ($password == $cpassword) {
+                $hash = password_hash($password, PASSWORD_DEFAULT);
 
-            // in de database zetten als user
-            $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':password', $hash);
-            $stmt->bindParam(':role', $role);
+                // in de database zetten als user
+                $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
+                $stmt->bindParam(':username', $username);
+                $stmt->bindParam(':password', $hash);
+                $stmt->bindParam(':role', $role);
 
-            if ($stmt->execute()) {
-                $showAlert = true;
+                if ($stmt->execute()) {
+                    $showAlert = true;
+                    // Set a cookie to rate limit account creation
+                    setcookie('account_created', 'true', time() + 300); // 300 seconds = 5 minutes
+                } else {
+                    $showError = "Oeps, er is iets fout gegaan!!";
+                }
             } else {
-                $showError = "Oeps, er is iets fout gegaan!!";
+                $showError = "Wachtwoorden komen niet overeen!";
             }
         } else {
-            $showError = "Wachtwoorden komen niet overeen!";
+            $showError = "Deze gebruikersnaam bestaat al!";
         }
-    } else {
-        $showError = "Deze gebruikersnaam bestaat al!";
     }
 }
 ?>
