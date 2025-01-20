@@ -52,20 +52,20 @@ $questionsWithOptions = getQuestionsAndOptions($quiz_id);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speel Quiz - <?php echo htmlspecialchars($quizInfo['quiz_name']); ?></title>
+    <title>Ctrl Alt Elite</title>
     <link rel="stylesheet" href="../CSS/quiz.css">
 </head>
 <body>
 <nav>
         <ul class="left-nav">
             <li><img src="../assets/ctrlaltelite.png"></li>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="discover.php">Discover</a></li>
-            <li><a href="dashboard/dashboard.php">Dashboard</a></li>
+            <li><a href="../index.php">Home</a></li>
+            <li><a href="../discover.php">Discover</a></li>
+            <li><a href="../dashboard/dashboard.php">Dashboard</a></li>
         </ul>
         <ul class="right-nav">
-            <li><a href="login.php">Login</a></li>
-            <li><a href="signup.php">Sign up</a></li>
+            <li><a href="../login.php">Login</a></li>
+            <li><a href="../signup.php">Sign up</a></li>
         </ul>
     </nav>
 
@@ -79,19 +79,22 @@ $questionsWithOptions = getQuestionsAndOptions($quiz_id);
         <?php foreach ($questionsWithOptions as $index => $questionWithOptions): ?>
             <div class="quiz-question">
                 <p><?php echo htmlspecialchars($questionWithOptions['question']['question_text']); ?></p>
-                <?php foreach ($questionWithOptions['options'] as $option): ?>
-                    <div class="option">
-                        <input type="checkbox" 
-                               id="q<?php echo $index; ?>_option<?php echo $option['option_id']; ?>" 
-                               name="question_<?php echo $questionWithOptions['question']['question_id']; ?>[]" 
-                               value="<?php echo $option['option_id']; ?>">
-                        <label for="q<?php echo $index; ?>_option<?php echo $option['option_id']; ?>"><?php echo htmlspecialchars($option['option_text']); ?></label>
-                    </div>
-                <?php endforeach; ?>
+                <div class="options">
+                    <?php foreach ($questionWithOptions['options'] as $option): ?>
+                        <div class="option">
+                            <input type="radio" 
+                                   id="q<?php echo $index; ?>_option<?php echo $option['option_id']; ?>"
+                                   name="question_<?php echo $questionWithOptions['question']['question_id']; ?>" 
+                                   value="<?php echo $option['option_id']; ?>">
+                            <label for="q<?php echo $index; ?>_option<?php echo $option['option_id']; ?>"><?php echo htmlspecialchars($option['option_text']); ?></label>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
+            <br>
         <?php endforeach; ?>
 
-        <button type="submit" class="btn">Verstuur Quiz</button>
+        <button type="submit" class="btn">Inleveren</button>
     </form>
     </div>
 </div>

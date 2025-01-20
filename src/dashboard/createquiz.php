@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="createquiz.php" method="post">
                 <h1>Maak een nieuwe quiz.</h1>
                 <h2>Quiz Naam:</h2>
-                <input type="text" name="name" placeholder="Bijv. Ctrl Alt Quiz!" required><br><br>
+                <input type="text" name="name" placeholder="Bijv. Ctrl Alt Quiz!" maxlength="20" minlength="1" required><br><br>
 
                 <div id="questions">
                     <div class="question">

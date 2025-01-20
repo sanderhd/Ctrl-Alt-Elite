@@ -37,6 +37,8 @@ foreach ($correctAnswers as $correctAnswer) {
         $user_answers = $_POST['question_' . $correctAnswer['question_id']];
         if (is_array($user_answers) && in_array($correctAnswer['option_id'], $user_answers)) {
             $score++;
+        } elseif ($user_answers == $correctAnswer['option_id']) {
+            $score++;
         }
     }
 }
@@ -88,6 +90,11 @@ foreach ($correctAnswers as $correctAnswer) {
                             $stmt->execute();
                             $user_answer_texts[] = $stmt->fetchColumn();
                         }
+                    } else {
+                        $stmt = $conn->prepare("SELECT option_text FROM Options WHERE option_id = :option_id");
+                        $stmt->bindParam(':option_id', $user_answers);
+                        $stmt->execute();
+                        $user_answer_texts[] = $stmt->fetchColumn();
                     }
                     echo htmlspecialchars(implode(', ', $user_answer_texts));
                 ?>
