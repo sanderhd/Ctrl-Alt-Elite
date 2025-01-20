@@ -87,6 +87,7 @@ nav ul li img {
     align-items: center;
     justify-content: center;
     margin-top: 50px;
+    
 }
 
 h1 {
@@ -115,6 +116,7 @@ input[type="text"] {
     justify-content: flex-start; 
     align-items: flex-start; 
     padding: 20px; 
+    box-shadow: 0 4px 8px rgba(29, 29, 29, 0.1);
 }
 
 .quizBox {
