@@ -2,22 +2,24 @@
 session_start();
 require '../database.php';
 
+// Functie om quiz info op te halen
 function getQuizInfo($quiz_id) {
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM Quiz WHERE quiz_id = :quiz_id");
+    $stmt = $conn->prepare("SELECT * FROM Quiz WHERE quiz_id = :quiz_id"); // haal de quiz op waar de quiz_id gelijk is aan de quiz_id
     $stmt->bindParam(':quiz_id', $quiz_id);
-    $stmt->execute();
+    $stmt->execute(); // voer de query uit
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+// Functie om correcte antwoorden op te halen
 function getCorrectAnswers($quiz_id) {
-    global $conn;
+    global $conn; // global zorgt ervoor dat de variabele buiten de functie ook gebruikt kan worden
     $stmt = $conn->prepare("SELECT q.question_id, q.question_text, o.option_id, o.option_text
                            FROM Questions q 
                            JOIN Options o ON q.question_id = o.question_id
-                           WHERE q.quiz_id = :quiz_id AND o.is_correct = 1");
+                           WHERE q.quiz_id = :quiz_id AND o.is_correct = 1"); // haal de vragen en opties op waar de is_correct 1 is
     $stmt->bindParam(':quiz_id', $quiz_id);
-    $stmt->execute();
+    $stmt->execute(); // voer de query uit
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -32,12 +34,13 @@ if (!$quizInfo) {
 $correctAnswers = getCorrectAnswers($quiz_id);
 
 $score = 0;
-foreach ($correctAnswers as $correctAnswer) {
+// voor elk goede antwoord dit uitvoeren
+foreach ($correctAnswers as $correctAnswer) { // loop door alle correcte antwoorden
     if (isset($_POST['question_' . $correctAnswer['question_id']])) {
         $user_answers = $_POST['question_' . $correctAnswer['question_id']];
-        if (is_array($user_answers) && in_array($correctAnswer['option_id'], $user_answers)) {
-            $score++;
-        } elseif ($user_answers == $correctAnswer['option_id']) {
+        if (is_array($user_answers) && in_array($correctAnswer['option_id'], $user_answers)) { // als het antwoord in de array zit
+            $score++; // score ophogen
+        } elseif ($user_answers == $correctAnswer['option_id']) { // als het antwoord gelijk is aan het goede antwoord
             $score++;
         }
     }
