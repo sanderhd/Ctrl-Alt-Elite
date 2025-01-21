@@ -38,7 +38,7 @@ try {
     <link rel="stylesheet" href="../CSS/dashboard.css">
 </head>
 <body>
-    <nav>
+    <nav style=" list-style-type: none;">
         <ul class="left-nav"></ul>
             <li><img src="../assets/ctrlaltelite.png"></li>
             <li><a href="../index.php">Home</a></li>
