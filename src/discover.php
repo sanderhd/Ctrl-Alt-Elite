@@ -56,6 +56,7 @@ try {
                 <h4>Created by: <?php echo htmlspecialchars($quiz['created_by']); ?></h4> <!-- quiz maker pakken uit de array en neerzetten in h4 -->
                 <h4>Quiz ID: <?php echo htmlspecialchars($quiz['quiz_id']); ?></h4> <!-- quiz id pakken uit de array en neerzetten in h4 -->
                 <button onclick="playQuiz(<?php echo htmlspecialchars($quiz['quiz_id']); ?>)">Play Quiz</button>
+                <button onclick="shareQuiz(<?php echo htmlspecialchars($quiz['quiz_id']); ?>)">Share</button>
             </div>
         <?php endforeach; ?> <!-- einde van de loop -->
     </div>
@@ -82,6 +83,15 @@ try {
 
         function playQuiz(quizId) {
             window.location.href = 'quiz/playQuiz.php?quizId=' + quizId; 
+        }
+
+        function shareQuiz(quizId) {
+            const quizLink = `https://ctrlaltelite.online/quiz/playQuiz.php?quizId=${quizId}`;
+            navigator.clipboard.writeText(quizLink).then(() => {
+                alert('Quiz link copied to clipboard: ' + quizLink);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
         }
     </script>
 </body>

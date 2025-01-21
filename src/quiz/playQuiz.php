@@ -45,6 +45,12 @@ if (!$quizInfo) {
 }
 
 $questionsWithOptions = getQuestionsAndOptions($quiz_id);
+
+// Calculate total time for the quiz
+$totalTime = 0;
+foreach ($questionsWithOptions as $questionWithOptions) {
+    $totalTime += $questionWithOptions['question']['time_limit'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +78,7 @@ $questionsWithOptions = getQuestionsAndOptions($quiz_id);
 <div class="quizContainer">
     <div class="quizBox">
         <h1><?php echo htmlspecialchars($quizInfo['quiz_name']); ?></h1>
+        <h2 id="totalTimeDisplay"><?php echo $totalTime; ?> sec</h2>
 
     <form action="submitQuiz.php" method="post">
         <input type="hidden" name="quiz_id" value="<?php echo $quiz_id; ?>">
@@ -98,5 +105,25 @@ $questionsWithOptions = getQuestionsAndOptions($quiz_id);
     </form>
     </div>
 </div>
+
+<script>
+    let totalTime = <?php echo $totalTime; ?>;
+    const totalTimeDisplay = document.getElementById('totalTimeDisplay');
+
+    function startTotalTimer() {
+        const timer = setInterval(() => {
+            totalTimeDisplay.innerText = totalTime + ' sec';
+            totalTime--;
+
+            if (totalTime < 0) {
+                clearInterval(timer);
+                alert('Time is up!');
+                document.querySelector('form').submit();
+            }
+        }, 1000);
+    }
+
+    window.onload = startTotalTimer;
+</script>
 </body>
 </html>
