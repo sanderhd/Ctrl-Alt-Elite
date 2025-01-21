@@ -16,6 +16,7 @@ body {
     background-color: var(--background);
     display: flex;
     flex-direction: column;
+    padding-top: 60px; /* Ensure content is below the navbar */
 }
 
 nav {
@@ -47,8 +48,8 @@ nav ul li a {
     color: var(--primary);  
     text-decoration: none;  
     font-family: "Poppins", sans-serif;
-    font-size: 16px;
-    padding: 8px 12px;
+    font-size: 14px; /* Reduce text size */
+    padding: 8px 10px;
     border-radius: 6px;
     transition: background-color 0.3s;
 }
@@ -74,7 +75,7 @@ nav ul.right-nav {
 
 nav ul li img {
     padding: 15px;
-    width: 175px;
+    width: 150px; /* Reduce image size */
 }
 
 .underline{
@@ -84,10 +85,12 @@ nav ul li img {
 
 h2{
     color: var(--primary);
+    font-size: 50px; /* Reduce text size */
 }
 
 h3{
     color: var(--primary);
+    font-size: 18px; /* Reduce text size */
 }
 
 .hostnow{
@@ -103,7 +106,7 @@ h3{
 }
 
 .main{
-    margin-top: 155px;
+    margin-top: 100px; /* Move content higher */
     margin-left: 25px;
     line-height: 1;
 }
@@ -156,7 +159,7 @@ h3{
 
 .appStore button span {
     font-family: "Poppins", sans-serif;
-    font-size: 16px;
+    font-size: 14px; /* Reduce text size */
     color: #fff; /* Make button text white */
 }
 
@@ -205,7 +208,7 @@ input[type="password"] {
 
 button {
     padding: 0.8em;
-    font-size: 1em;
+    font-size: 0.9em; /* Reduce text size */
     background-color: var(--secondary);
     color: white;
     border: none;
@@ -244,4 +247,180 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+    }
+
+    nav ul {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+    }
+
+    nav ul.left-nav,
+    nav ul.right-nav {
+        flex-direction: row;
+        gap: 10px;
+        width: auto;
+    }
+
+    nav ul li {
+        margin-right: 10px;
+        width: auto;
+    }
+
+    nav ul li a {
+        font-size: 12px; /* Further reduce text size */
+        padding: 6px 8px;
+        width: auto;
+    }
+
+    nav ul li img {
+        width: 100px; /* Further reduce image size for smaller screens */
+    }
+
+    .main {
+        margin-top: 80px; /* Move content higher for smaller screens */
+        margin-left: 10px;
+    }
+
+    .main h2 {
+        font-size: 35px; /* Further reduce text size */
+    }
+
+    .main h3 {
+        font-size: 16px; /* Further reduce text size */
+    }
+
+    .opaImage {
+        margin-top: -150px; /* Adjust margin to fit smaller screens */
+    }
+
+    .opaImage img {
+        width: 50%; /* Reduce image size */
+    }
+
+    .appStore {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .appStore button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .appStore button span {
+        font-size: 12px; /* Further reduce text size */
+    }
+
+    .loginBox, .signupBox {
+        padding: 1em;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 0.9em;
+    }
+
+    button {
+        font-size: 0.8em; /* Further reduce text size */
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+    }
+
+    nav ul {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+    }
+
+    nav ul.left-nav,
+    nav ul.right-nav {
+        flex-direction: row;
+        gap: 10px;
+        width: auto;
+    }
+
+    nav ul li {
+        margin-right: 10px;
+        width: auto;
+    }
+
+    nav ul li a {
+        font-size: 10px; /* Further reduce text size */
+        padding: 4px 6px;
+        width: auto;
+    }
+
+    nav ul li img {
+        width: 75px; /* Further reduce image size for smallest screens */
+    }
+
+    .main {
+        margin-top: 70px; /* Move content higher for smallest screens */
+        margin-left: 10px;
+    }
+
+    .main h2 {
+        font-size: 30px; /* Further reduce text size */
+    }
+
+    .main h3 {
+        font-size: 14px; /* Further reduce text size */
+    }
+
+    .opaImage {
+        margin-top: -100px; /* Adjust margin to fit smallest screens */
+    }
+
+    .opaImage img {
+        width: 40%; /* Further reduce image size */
+    }
+
+    .appStore button img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .appStore button span {
+        font-size: 10px; /* Further reduce text size */
+    }
+
+    .loginBox, .signupBox {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.2em;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 0.8em;
+    }
+
+    button {
+        font-size: 0.7em; /* Further reduce text size */
+    }
 }
