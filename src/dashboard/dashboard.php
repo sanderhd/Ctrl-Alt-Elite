@@ -14,7 +14,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // haal alle quizzes en de usernames en hun makers op uit de database
-    $stmt = $conn->prepare("SELECT quiz_name FROM Quiz WHERE created_by = :username");
+    $stmt = $conn->prepare("SELECT quiz_id, quiz_name FROM Quiz WHERE created_by = :username"); // Ensure 'quiz_id' column is selected
     $stmt->bindParam(':username', $_SESSION['username']);
     $stmt->execute();
 
@@ -57,6 +57,9 @@ try {
                 <?php foreach ($quizzes as $quiz): ?> <!-- loop door alle quizen en in een div neerzetten -->
                     <div class="quizBox">
                         <h3><?php echo htmlspecialchars($quiz['quiz_name']); ?></h3>
+                        <button onclick="playQuiz('<?php echo $quiz['quiz_id']; ?>')">Play</button>
+                        <button onclick="shareQuiz('<?php echo $quiz['quiz_id']; ?>')">Share</button>
+                        <button class="deleteButton" onclick="deleteQuiz('<?php echo $quiz['quiz_id']; ?>')">Delete</button>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -64,5 +67,26 @@ try {
             <?php endif; ?>
         </div>
     </div>
+
+    <script>
+        function playQuiz(quizId) {
+            window.location.href = `../quiz/playQuiz.php?quizId=${encodeURIComponent(quizId)}`;
+        }
+
+        function shareQuiz(quizId) {
+            const quizLink = `https://ctrlaltelite.online/quiz/playQuiz.php?quizId=${quizId}`;
+            navigator.clipboard.writeText(quizLink).then(() => {
+                alert('Quiz link copied to clipboard: ' + quizLink);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        function deleteQuiz(quizId) {
+            if (confirm('Weet je zeker dat je deze quiz wilt verwijderen?')) {
+                window.location.href = `deleteQuiz.php?quizId=${encodeURIComponent(quizId)}`;
+            }
+        }
+    </script>
 </body>
 </html>
