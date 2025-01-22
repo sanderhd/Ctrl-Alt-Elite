@@ -25,8 +25,7 @@
     <div class="main">
         <span style="color: var(--secondary)"><b>LETS START THE QUIZ!</b></span>
         <h2>Step into a Realm of <br>Infinite Quiz Excitement</h2>
-        <h3>Ready to test your knowledge and have fun? Challenge <br> friends, learn new things, and Kahoot your way to
-            victory!</h3>
+        <h3>Ready to test your knowledge and have fun? Challenge <br> challenge your friends, learn something new, and play your way to victory!</h3>
 
         <div class="opaImage">
             <img src="assets/opa.png" alt="opa">
