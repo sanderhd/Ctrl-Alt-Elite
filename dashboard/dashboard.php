@@ -45,8 +45,13 @@ try {
             <li><a href="../discover.php">Discover</a></li>
         </ul>
         <ul class="right-nav">
-            <li><a href="settings.php">Settings</a></li>
-            <li><a href="../signout.php">Sign Out</a></li>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="settings.php">Settings</a></li>
+                <li><a href="../signout.php">Sign Out</a></li>
+            <?php else: ?>
+                <li><a href="../login.php">Login</a></li>
+                <li><a href="../signup.php">Sign up</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
     <div class="dashboardContainer">

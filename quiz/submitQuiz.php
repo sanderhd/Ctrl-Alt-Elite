@@ -71,8 +71,6 @@ foreach ($correctAnswers as $correctAnswer) { // loop door alle correcte antwoor
     </nav>
 
 <main class="main">
-    
-
     <div class="quizContainer">
         <div class="quizBox">
             <h1>Resultaten</h1>

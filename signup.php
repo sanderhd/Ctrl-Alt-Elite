@@ -1,4 +1,5 @@
 <?php
+session_start();
 $showAlert = false;
 $showError = false;
 
@@ -59,6 +60,23 @@ if (isset($_COOKIE['account_created'])) {
     <title>Sign Up</title>
 </head>
 <body>
+    <nav>
+        <ul class="left-nav">
+            <li><img src="assets/ctrlaltelite.png"></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="discover.php">Discover</a></li>
+            <li><a href="dashboard/dashboard.php">Dashboard</a></li>
+        </ul>
+        <ul class="right-nav">
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="dashboard/dashboard.php">Dashboard</a></li>
+                <li><a href="signout.php">Sign Out</a></li>
+            <?php else: ?>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="signup.php">Sign up</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
     <?php
     if ($showAlert) {
         echo '<div class="alert alert-success">

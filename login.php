@@ -1,4 +1,5 @@
 <?php
+session_start();
 require './database.php';
 
 $showError = false;
@@ -17,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // controleer of het wachtwoord klopt
         if (password_verify($password, $user['password'])) {
             // inloggen en naar dashboard sturen
-            session_start();
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $user['id']; // Store user ID in session
             header("Location: dashboard/dashboard.php");
@@ -40,6 +40,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
 </head>
 <body>
+    <nav>
+        <ul class="left-nav">
+            <li><img src="assets/ctrlaltelite.png"></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="discover.php">Discover</a></li>
+            <li><a href="dashboard/dashboard.php">Dashboard</a></li>
+        </ul>
+        <ul class="right-nav">
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="dashboard/dashboard.php">Dashboard</a></li>
+                <li><a href="signout.php">Sign Out</a></li>
+            <?php else: ?>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="signup.php">Sign up</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
     <?php
     if ($showError) {
         echo '<div class="alert alert-danger">
