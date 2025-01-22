@@ -138,11 +138,7 @@ input[type="text"] {
     color: var(--secondary);
 }
 
-.quizBox h4 {
-    color: var(--primary);
-    font-size: 16px;
-    margin-bottom: 10px;
-}
+
 
 button {
     padding: 0.8em;
@@ -152,6 +148,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 button:hover {
