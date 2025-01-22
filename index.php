@@ -18,11 +18,10 @@ session_start();
             <li><img src="assets/ctrlaltelite.png"></li>
             <li><a href="index.php">Home</a></li>
             <li><a href="discover.php">Discover</a></li>
-            <li><a href="dashboard/dashboard.php">Dashboard</a></li>
         </ul>
         <ul class="right-nav">
             <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="dashboard/settings.php">Settings</a></li>
+                <li><a href="dashboard/dashboard.php">Dashboard</a></li>
                 <li><a href="signout.php">Sign Out</a></li>
             <?php else: ?>
                 <li><a href="login.php">Login</a></li>

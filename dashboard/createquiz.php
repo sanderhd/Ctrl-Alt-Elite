@@ -120,26 +120,26 @@ if (isset($_COOKIE['quiz_created'])) {
     <div class="createContainer">
         <div class="createBox">
             <form id="quizForm" action="createquiz.php" method="post" onsubmit="return validateForm()">
-                <h1>Maak een nieuwe quiz.</h1>
-                <h2>Quiz Naam:</h2>
-                <input type="text" name="name" placeholder="Bijv. Ctrl Alt Quiz!" maxlength="20" minlength="1" required><br><br>
+                <h1>Create a new quiz.</h1>
+                <h2>Quiz Name:</h2>
+                <input type="text" name="name" placeholder="e.g. Ctrl Alt Quiz!" maxlength="20" minlength="1" required><br><br>
 
                 <div id="questions">
                     <div class="question" id="question1">
-                        <h3>Vraag 1:</h3>
-                        <input type="text" name="question1" placeholder="Bijv. Wat is de hoofdstad van Nederland?" required><br>
-                        <span>Antwoorden | Zet een komma tussen de antwoorden als je meer antwoorden wilt dan 1.</span><br>
-                        <input type="text" name="antwoorden1" placeholder="Bijv. Amsterdam, Rotterdam, Groningen, Utrecht" max="4" required><br>
-                        <span>Goede Antwoord | Typ het 1:1 over van de mogelijke antwoorden.</span><br>
-                        <input type="text" name="correctanswer1" placeholder="Bijv. Amsterdam" required><br><br>
-                        <span>Tijdslimiet (seconden):</span><br>
-                        <input type="number" name="timelimit1" placeholder="Bijv. 30" min="1" required><br><br>
-                        <button type="button" onclick="removeQuestion(1)">Verwijder vraag</button>
+                        <h3>Question 1:</h3>
+                        <input type="text" name="question1" placeholder="e.g. What is the capital of the Netherlands?" required><br>
+                        <span>Answers | Separate answers with a comma if you want more than one answer.</span><br>
+                        <input type="text" name="antwoorden1" placeholder="e.g. Amsterdam, Rotterdam, Groningen, Utrecht" max="4" required><br>
+                        <span>Correct Answer | Type it exactly as one of the possible answers.</span><br>
+                        <input type="text" name="correctanswer1" placeholder="e.g. Amsterdam" required><br><br>
+                        <span>Time limit (seconds):</span><br>
+                        <input type="number" name="timelimit1" placeholder="e.g. 30" min="1" required><br><br>
+                        <button type="button" onclick="removeQuestion(1)">Remove question</button>
                     </div>
                 </div>
 
-                <button type="submit">Sla quiz op</button><br>
-                <button type="button" onclick="addQuestion()">Voeg vraag toe</button><br>
+                <button type="submit">Save quiz</button><br>
+                <button type="button" onclick="addQuestion()">Add question</button><br>
             </form>
         </div>
     </div>
@@ -160,15 +160,15 @@ if (isset($_COOKIE['quiz_created'])) {
             questionDiv.classList.add('question');
             questionDiv.id = `question${questionCount}`;
             questionDiv.innerHTML = `
-                <h3>Vraag ${questionCount}:</h3>
-                <input type="text" name="question${questionCount}" placeholder="Bijv. Wat is de hoofdstad van Nederland?" max="4" required><br>
-                <span>Antwoorden | Zet een komma tussen de antwoorden als je meer antwoorden wilt dan 1.</span><br>
-                <input type="text" name="antwoorden${questionCount}" placeholder="Zet een comma tussen de antwoorden." required><br>
-                <span>Goede Antwoord | Typ het 1:1 over van de mogelijke antwoorden.</span><br>
-                <input type="text" name="correctanswer${questionCount}" placeholder="Bijv. Amsterdam" required><br><br>
-                <span>Tijdslimiet (seconden):</span><br>
-                <input type="number" name="timelimit${questionCount}" placeholder="Bijv. 30" min="1" required><br><br>
-                <button type="button" onclick="removeQuestion(${questionCount})">Verwijder vraag</button>
+                <h3>Question ${questionCount}:</h3>
+                <input type="text" name="question${questionCount}" placeholder="e.g. What is the capital of the Netherlands?" max="4" required><br>
+                <span>Answers | Separate answers with a comma if you want more than one answer.</span><br>
+                <input type="text" name="antwoorden${questionCount}" placeholder="Separate answers with a comma." required><br>
+                <span>Correct Answer | Type it exactly as one of the possible answers.</span><br>
+                <input type="text" name="correctanswer${questionCount}" placeholder="e.g. Amsterdam" required><br><br>
+                <span>Time limit (seconds):</span><br>
+                <input type="number" name="timelimit${questionCount}" placeholder="e.g. 30" min="1" required><br><br>
+                <button type="button" onclick="removeQuestion(${questionCount})">Remove question</button>
             `;
             questionsDiv.appendChild(questionDiv);
         }

@@ -55,11 +55,11 @@ try {
         </ul>
     </nav>
     <div class="dashboardContainer">
-        <h1>Mijn Quizzes</h1>
-        <a href="createquiz.php">Maak een quiz</a>
+        <h1>My Quizzes</h1>
+        <a href="createquiz.php">Create a quiz</a>
         <div class="quizContainer">
-            <?php if (!empty($quizzes)): ?> <!-- als er quizen zijn -->
-                <?php foreach ($quizzes as $quiz): ?> <!-- loop door alle quizen en in een div neerzetten -->
+            <?php if (!empty($quizzes)): ?> <!-- if there are quizzes -->
+                <?php foreach ($quizzes as $quiz): ?> <!-- loop through all quizzes and display them in a div -->
                     <div class="quizBox">
                         <h3><?php echo htmlspecialchars($quiz['quiz_name']); ?></h3>
                         <button onclick="playQuiz('<?php echo $quiz['quiz_id']; ?>')">Play</button>
@@ -68,7 +68,7 @@ try {
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>Je hebt nog geen quizzes gemaakt.</p>
+                <p>You haven't created any quizzes yet.</p>
             <?php endif; ?>
         </div>
     </div>
@@ -88,7 +88,7 @@ try {
         }
 
         function deleteQuiz(quizId) {
-            if (confirm('Weet je zeker dat je deze quiz wilt verwijderen?')) {
+            if (confirm('Are you sure you want to delete this quiz?')) {
                 window.location.href = `deleteQuiz.php?quizId=${encodeURIComponent(quizId)}`;
             }
         }
