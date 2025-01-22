@@ -38,13 +38,13 @@ try {
     <link rel="stylesheet" href="../CSS/dashboard.css">
 </head>
 <body>
-    <nav style=" list-style-type: none;">
-        <ul class="left-nav"></ul>
+    <nav>
+        <ul class="left-nav">
             <li><img src="../assets/ctrlaltelite.png"></li>
             <li><a href="../index.php">Home</a></li>
             <li><a href="../discover.php">Discover</a></li>
         </ul>
-        <ul class="right-nav"></ul>
+        <ul class="right-nav">
             <li><a href="settings.php">Settings</a></li>
             <li><a href="../signout.php">Sign Out</a></li>
         </ul>
@@ -52,7 +52,7 @@ try {
     <div class="dashboardContainer">
         <h1>Mijn Quizzes</h1>
         <a href="createquiz.php">Maak een quiz</a>
-        <div class="quizContainer"></div>
+        <div class="quizContainer">
             <?php if (!empty($quizzes)): ?> <!-- als er quizen zijn -->
                 <?php foreach ($quizzes as $quiz): ?> <!-- loop door alle quizen en in een div neerzetten -->
                     <div class="quizBox">

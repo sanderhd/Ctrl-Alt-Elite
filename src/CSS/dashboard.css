@@ -6,6 +6,78 @@
     --secondary: #FF833D;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px; /* Ensure content is below the navbar */
+}
+
+nav {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style-type: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: var(--primary);  
+    text-decoration: none;  
+    font-family: "Poppins", sans-serif;
+    font-size: 14px; /* Reduce text size */
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+    background-color: var(--secondary);
+    color: var(--background);  
+    outline: none;
+}
+
+nav ul.left-nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav ul.right-nav {
+    margin-left: auto;
+    display: flex;
+    gap: 15px; 
+    margin-right: 25px;
+}
+
+nav ul li img {
+    padding: 15px;
+    width: 150px; /* Reduce image size */
+}
+
 .quizContainer {
     display: flex;
     flex-wrap: wrap;
@@ -64,65 +136,6 @@ body {
     flex-direction: column;
 }
 
-nav {
-    padding: 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 50px;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-
-nav ul li {
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: var(--primary);  
-    text-decoration: none;  
-    font-family: "Poppins", sans-serif;
-    font-size: 16px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: background-color 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a:focus {
-    background-color: var(--secondary);
-    color: var(--background);  
-    outline: none;
-}
-
-nav ul.left-nav {
-    display: flex;
-    gap: 20px;
-}
-
-nav ul.right-nav {
-    margin-left: auto;
-    display: flex;
-    gap: 15px; 
-    margin-right: 25px;
-}
-
-nav ul li img {
-    padding: 15px;
-    width: 175px;
-}
 
 /*  */
 /*  */
