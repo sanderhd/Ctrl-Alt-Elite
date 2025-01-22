@@ -46,7 +46,7 @@ try {
     <div class="searchContainer">
         <h1>Available Quizzes</h1>
         <input type="text" id="searchInput" onkeyup="searchQuiz()" placeholder="Search for quiz names..">
-        <button>Search</button>
+       
     </div>
 
     <div class="quizContainer" id="quizContainer">
@@ -55,8 +55,8 @@ try {
                 <h3><?php echo htmlspecialchars($quiz['quiz_name']); ?></h3>  <!--  quiz naam pakken uit de array en neerzetten in h3 -->
                 <h4>Created by: <?php echo htmlspecialchars($quiz['created_by']); ?></h4> <!-- quiz maker pakken uit de array en neerzetten in h4 -->
                 
-                <button onclick="playQuiz(<?php echo htmlspecialchars($quiz['quiz_id']); ?>)">Play Quiz</button><br>
-                <br> 
+                <button onclick="playQuiz(<?php echo htmlspecialchars($quiz['quiz_id']); ?>)">Play Quiz</button>
+                
                 <button onclick="shareQuiz(<?php echo htmlspecialchars($quiz['quiz_id']); ?>)">Share</button>
             </div>
         <?php endforeach; ?> <!-- einde van de loop -->
