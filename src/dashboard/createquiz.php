@@ -133,7 +133,7 @@ if (isset($_COOKIE['quiz_created'])) {
                         <span>Goede Antwoord | Typ het 1:1 over van de mogelijke antwoorden.</span><br>
                         <input type="text" name="correctanswer1" placeholder="Bijv. Amsterdam" required><br><br>
                         <span>Tijdslimiet (seconden):</span><br>
-                        <input type="number" name="timelimit1" placeholder="Bijv. 30" required><br><br>
+                        <input type="number" name="timelimit1" placeholder="Bijv. 30" min="1" required><br><br> <!-- Add min attribute to prevent negative values -->
                     </div>
                 </div>
 
@@ -145,8 +145,14 @@ if (isset($_COOKIE['quiz_created'])) {
 
     <script>
         let questionCount = 1;
+        const maxQuestions = 10; // maximaal aantal vragen
 
         function addQuestion() {
+            if (questionCount >= maxQuestions) { // als je meer dan 10 vragen hebt krijg je een alert
+                alert("Je kunt maximaal " + maxQuestions + " vragen toevoegen.");
+                return;
+            }
+
             questionCount++;
             const questionsDiv = document.getElementById('questions');
             const questionDiv = document.createElement('div');
@@ -159,7 +165,7 @@ if (isset($_COOKIE['quiz_created'])) {
                 <span>Goede Antwoord | Typ het 1:1 over van de mogelijke antwoorden.</span><br>
                 <input type="text" name="correctanswer${questionCount}" placeholder="Bijv. Amsterdam" required><br><br>
                 <span>Tijdslimiet (seconden):</span><br>
-                <input type="number" name="timelimit${questionCount}" placeholder="Bijv. 30" required><br><br>
+                <input type="number" name="timelimit${questionCount}" placeholder="Bijv. 30" min="1" required><br><br> <!-- Add min attribute to prevent negative values -->
             `;
             questionsDiv.appendChild(questionDiv);
         }
