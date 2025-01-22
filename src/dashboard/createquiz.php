@@ -119,13 +119,13 @@ if (isset($_COOKIE['quiz_created'])) {
     ?>
     <div class="createContainer">
         <div class="createBox">
-            <form action="createquiz.php" method="post">
+            <form id="quizForm" action="createquiz.php" method="post" onsubmit="return validateForm()">
                 <h1>Maak een nieuwe quiz.</h1>
                 <h2>Quiz Naam:</h2>
                 <input type="text" name="name" placeholder="Bijv. Ctrl Alt Quiz!" maxlength="20" minlength="1" required><br><br>
 
                 <div id="questions">
-                    <div class="question">
+                    <div class="question" id="question1">
                         <h3>Vraag 1:</h3>
                         <input type="text" name="question1" placeholder="Bijv. Wat is de hoofdstad van Nederland?" required><br>
                         <span>Antwoorden | Zet een komma tussen de antwoorden als je meer antwoorden wilt dan 1.</span><br>
@@ -133,7 +133,8 @@ if (isset($_COOKIE['quiz_created'])) {
                         <span>Goede Antwoord | Typ het 1:1 over van de mogelijke antwoorden.</span><br>
                         <input type="text" name="correctanswer1" placeholder="Bijv. Amsterdam" required><br><br>
                         <span>Tijdslimiet (seconden):</span><br>
-                        <input type="number" name="timelimit1" placeholder="Bijv. 30" min="1" required><br><br> <!-- Add min attribute to prevent negative values -->
+                        <input type="number" name="timelimit1" placeholder="Bijv. 30" min="1" required><br><br>
+                        <button type="button" onclick="removeQuestion(1)">Verwijder vraag</button>
                     </div>
                 </div>
 
@@ -157,6 +158,7 @@ if (isset($_COOKIE['quiz_created'])) {
             const questionsDiv = document.getElementById('questions');
             const questionDiv = document.createElement('div');
             questionDiv.classList.add('question');
+            questionDiv.id = `question${questionCount}`;
             questionDiv.innerHTML = `
                 <h3>Vraag ${questionCount}:</h3>
                 <input type="text" name="question${questionCount}" placeholder="Bijv. Wat is de hoofdstad van Nederland?" max="4" required><br>
@@ -165,9 +167,26 @@ if (isset($_COOKIE['quiz_created'])) {
                 <span>Goede Antwoord | Typ het 1:1 over van de mogelijke antwoorden.</span><br>
                 <input type="text" name="correctanswer${questionCount}" placeholder="Bijv. Amsterdam" required><br><br>
                 <span>Tijdslimiet (seconden):</span><br>
-                <input type="number" name="timelimit${questionCount}" placeholder="Bijv. 30" min="1" required><br><br> <!-- Add min attribute to prevent negative values -->
+                <input type="number" name="timelimit${questionCount}" placeholder="Bijv. 30" min="1" required><br><br>
+                <button type="button" onclick="removeQuestion(${questionCount})">Verwijder vraag</button>
             `;
             questionsDiv.appendChild(questionDiv);
+        }
+
+        function removeQuestion(questionNumber) {
+            const questionDiv = document.getElementById(`question${questionNumber}`);
+            if (questionDiv) {
+                questionDiv.remove();
+                questionCount--;
+            }
+        }
+
+        function validateForm() {
+            if (questionCount < 1) {
+                alert("Je moet minimaal één vraag toevoegen.");
+                return false;
+            }
+            return true;
         }
     </script>
 </body>
