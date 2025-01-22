@@ -20,12 +20,6 @@
         <ul class="right-nav">
             <li><a href="login.php">Login</a></li>
             <li><a href="signup.php">Sign up</a></li>
-            <li><i class="fa-solid fa-globe"></i>
-                <select name="language" id="language">
-                    <option value="english">EN</option>
-                    <option value="dutch">NL</option>
-                </select>
-            </li>
         </ul>
     </nav>
     <div class="main">
@@ -38,19 +32,7 @@
         </div>
 
         <button type="submit" class="hostnow" onclick="sendToDashboard()">Host Now!</button> 
-        <a class="underline" style="text-align: left;" href="discover.php">Create Your Quiz</a>
-            
-        <h4>Get our app now on:</h4>
-        <div class="appStore">
-            <button>
-                <img src="assets/play_store_grey.png" alt="Google Play">
-                <span>Play Store</span>
-            </button>
-            <button>
-                <img src="assets/app_store_grey.png" alt="App Store">
-                <span>App Store</span>
-            </button>
-        </div>
+        <a class="underline" style="text-align: left;" href="dashboard/dashboard.php">Create Your Quiz</a>
     </div>
     
     <script>
