@@ -74,7 +74,7 @@ foreach ($correctAnswers as $correctAnswer) { // loop door alle correcte antwoor
     <div class="quizContainer">
         <div class="quizBox">
             <h1>Resultaten</h1>
-            <p>Je hebt <strong><?php echo $score; ?></strong> van de <strong><?php echo count($correctAnswers); ?></strong> vragen goed beantwoord.</p>
+            <p>Je hebt <strong style="color: var(--secondary);"><?php echo $score; ?></strong> van de <strong style="color: var(--secondary);"><?php echo count($correctAnswers); ?></strong> vragen goed beantwoord.</p>
         <h3>Je Antwoorden:</h3>
         <?php foreach ($correctAnswers as $correctAnswer): ?>
             <li>

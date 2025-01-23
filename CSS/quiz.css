@@ -79,7 +79,7 @@ nav ul li img {
 
 h1 {
     text-align: center;
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 h2 {
@@ -89,7 +89,7 @@ h2 {
 
 h3 {
     text-align: center;
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 p {

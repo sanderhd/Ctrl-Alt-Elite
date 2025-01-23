@@ -131,12 +131,11 @@ input[type="text"] {
 }
 
 .quizBox h3 {
+    margin-top: 0px;
     font-size: 20px;
     margin-bottom: 10px;
     color: var(--secondary);
 }
-
-
 
 button {
     display: block;
@@ -147,8 +146,8 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
-
+    margin-top: 5px;
+    width: 100%;
     
 }
 

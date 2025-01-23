@@ -107,6 +107,10 @@ nav ul li img {
     transition: background-color 0.3s;
 }
 
+.dashboardContainer button {
+    width: 100%;
+}
+
 .quizBox {
     display: inline-block;
     background-color: #fff;
@@ -122,18 +126,6 @@ nav ul li img {
 
 .quizBox:hover {
     transform: translateY(-5px);
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-body {
-    font-family: "Poppins", sans-serif;
-    background-color: var(--background);
-    display: flex;
-    flex-direction: column;
 }
 
 
@@ -155,6 +147,11 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+}
+
+.settingsBox button {
+    width: 100%;
+    margin-top: -5px;
 }
 
 form {
@@ -180,8 +177,8 @@ input[type="password"] {
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 100%; /* Make inputs full width */
-    max-width: 400px; /* Set a maximum width */
+    width: 100%; 
+    max-width: 400px; 
 }
 
 button {
@@ -193,6 +190,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 400px;
 }
 
 button:hover {
