@@ -105,6 +105,7 @@ nav ul li img {
     padding: 10px 20px;
     border-radius: 6px;
     transition: background-color 0.3s;
+    text-decoration: none; /* Verwijder de lijn onder de tekst */
 }
 
 .dashboardContainer button {
