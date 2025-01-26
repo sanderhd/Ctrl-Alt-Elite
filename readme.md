@@ -1,3 +1,3 @@
 # Ctrl Alt Elite | Quiz
 
-Quiz voor de projectweek.
+Kahoot type Quizz platform made in PHP
